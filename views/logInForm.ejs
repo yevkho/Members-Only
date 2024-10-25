@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>please log in</h1>
+
+    <% if (locals.error && locals.error.length > 0) { %>
+    <ul style="color: red">
+      <% error.forEach(function(message) { %>
+      <li><%= message %></li>
+      <% }); %>
+    </ul>
+    <% } %>
+
+    <form action="/login" method="POST">
+      <label for="username">Username: </label>
+      <input
+        id="username"
+        name="username"
+        placeholder="username"
+        type="text"
+        value="<%= locals.username || '' %>"
+      />
+      <label for="password">Password: </label>
+      <input id="password" name="password" type="password" />
+      <button>Log In</button>
+    </form>
+  </body>
+</html>

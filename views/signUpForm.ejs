@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+  </head>
+  <body>
+    <h1>Sign Up</h1>
+    <%- include("partials/errors.ejs") %>
+    <form action="/signup" method="POST">
+      <div>
+        <label for="firstname">First Name: </label>
+        <input id="firstname" name="firstname" type="text" />
+      </div>
+
+      <div>
+        <label for="lastname">Last Name: </label>
+        <input id="lastname" name="lastname" type="text" />
+      </div>
+
+      <div>
+        <label for="username">Username: </label>
+        <input id="username" name="username" placeholder="e-mail" type="text" />
+      </div>
+
+      <div>
+        <label for="password">Password: </label>
+        <input id="password" name="password" type="password" />
+      </div>
+
+      <div>
+        <label for="repeatpassword">Repeat Password: </label>
+        <input id="repeatpassword" name="repeatpassword" type="password" />
+      </div>
+
+      <div>
+        <label for="membercode">Member Code: </label>
+        <input id="membercode" name="membercode" type="text" />
+      </div>
+
+      <div>
+        <label><input type="checkbox" name="admin" value="true" /> Admin</label>
+      </div>
+
+      <button>Sign Up</button>
+    </form>
+  </body>
+</html>

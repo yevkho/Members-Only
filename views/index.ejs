@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>Members Only</title>
+  </head>
+  <body>
+    <!-- Nav options -->
+
+    <% if (locals.currentUser) {%>
+    <h1>Welcome Back <%= currentUser.username %></h1>
+    <% if (locals.currentUser.membership) {%>
+    <div>Exclusive Member</div>
+    <%}%> <% if (locals.currentUser.admin) {%>
+    <div>Admin</div>
+    <%}%>
+    <a href="/logout">Log out</a>
+
+    <% } else { %>
+    <div><a href="/signup">Sign Up</a></div>
+    <div><a href="/login">Log In</a></div>
+    <%}%>
+
+    <!-- Messages -->
+
+    <% locals.messages.map((message) => { %>
+    <h3><%= message.title %></h3>
+    <p><%= message.content %></p>
+
+    <% if (locals.currentUser && locals.currentUser.membership) {%>
+    <p><%= message.firstname %></p>
+    <p><%= message.timestamp %></p>
+    <%}%> <% if (locals.currentUser && locals.currentUser.admin) {%>
+    <form action="messages/<%= message.id %>/delete" method="POST">
+      <button type="submit" onclick="return confirm('Sure?');">
+        Delete Message
+      </button>
+    </form>
+    <%}%>
+
+    <hr />
+    <% }) %>
+
+    <!-- New Message button -->
+    <% if (locals.currentUser) {%>
+    <div>
+      <button onClick="location.href='/messages/new'">New Message</button>
+    </div>
+    <%}%>
+  </body>
+</html>
