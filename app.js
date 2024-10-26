@@ -8,7 +8,7 @@ const flash = require("connect-flash");
 require("./config/passportConfig");
 const pool = require("./config/dbConfig");
 
-// routes
+// import routers
 const indexRoutes = require("./routes/indexRoutes");
 const messagesRoutes = require("./routes/messagesRoutes");
 

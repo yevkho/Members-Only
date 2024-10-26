@@ -22,7 +22,7 @@ const signUpUserGet = (req, res) => {
   res.render("signUpForm");
 };
 
-// 3 sign up POST
+// 3 sign up POST (separate module)
 const validateSignUp = [
   body("firstname")
     .trim()
@@ -40,10 +40,21 @@ const validateSignUp = [
     .trim()
     .isEmail()
     .withMessage("Username must be a valid e-mail address"),
+  // custom validator to check if username already exists (query db)
   body("password")
-    .isLength({ min: 6, max: 10 })
-    .withMessage(`Password must be between 6 and 10 characters.`),
+    .trim()
+    .isLength({ min: 8 })
+    .withMessage("Password should be 8 characters long.")
+    .matches(/[A-Z]/)
+    .withMessage("Password must contain at least one uppercase letter.")
+    .matches(/[0-9]/)
+    .withMessage("Password must contain at least one number.")
+    .matches(/[@$!%*?&]/)
+    .withMessage("Password must contain at least one special character."),
   body("repeatpassword")
+    .trim()
+    .notEmpty()
+    .withMessage("Confirm password should not be empty.")
     .custom((value, { req }) => {
       return value === req.body.password;
     })
@@ -68,6 +79,9 @@ const signUpUserPost = [
     console.log(req.body);
     const { firstname, lastname, username, password, membercode, admin } =
       req.body;
+
+    // Check if the user already exists
+    // add code here - if exists return sign up form with error message
 
     try {
       // async hashing of password

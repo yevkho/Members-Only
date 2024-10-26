@@ -3,7 +3,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
 const pool = require("../config/dbConfig");
 
-// 1) the basic Authentication callback
+// 1) the basic Authentication callback (basic mlw with redirects based on result, but just wrapped tailored function)
 const verifyCallback = async (username, password, done) => {
   try {
     // 1 - get user from db

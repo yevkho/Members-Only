@@ -32,6 +32,7 @@ async function addUser(
      VALUES ($1, $2, $3, $4, $5, $6)`,
     [firstname, lastname, username, hashedPassword, membership, isAdmin]
   );
+  console.log("User added to database.");
 }
 
 // 2) add new message
